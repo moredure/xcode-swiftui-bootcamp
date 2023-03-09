@@ -24,8 +24,8 @@ struct ContentView: View {
             }
         }.refreshable {
             print("doing")
-            
             await self.scaleChampStore.loadIP()
+            print(Task.isCancelled)
         }.task {
             print("onAppear")
             await self.scaleChampStore.loadIP()

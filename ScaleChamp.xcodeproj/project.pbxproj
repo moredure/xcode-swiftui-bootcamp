@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D4B9F2E29BA2BCC0063E20D /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4B9F2D29BA2BCC0063E20D /* HTTPClient.swift */; };
+		8D4B9F3029BA2BF30063E20D /* IPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4B9F2F29BA2BF30063E20D /* IPService.swift */; };
+		8D4B9F3229BA2C170063E20D /* ScaleChampStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4B9F3129BA2C170063E20D /* ScaleChampStore.swift */; };
 		8DE3770629B9E6190011C8EA /* ScaleChampApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3770529B9E6190011C8EA /* ScaleChampApp.swift */; };
 		8DE3770829B9E6190011C8EA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3770729B9E6190011C8EA /* ContentView.swift */; };
 		8DE3770A29B9E61A0011C8EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DE3770929B9E61A0011C8EA /* Assets.xcassets */; };
@@ -34,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8D4B9F2D29BA2BCC0063E20D /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		8D4B9F2F29BA2BF30063E20D /* IPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPService.swift; sourceTree = "<group>"; };
+		8D4B9F3129BA2C170063E20D /* ScaleChampStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleChampStore.swift; sourceTree = "<group>"; };
 		8DE3770229B9E6190011C8EA /* ScaleChamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScaleChamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DE3770529B9E6190011C8EA /* ScaleChampApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleChampApp.swift; sourceTree = "<group>"; };
 		8DE3770729B9E6190011C8EA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -98,6 +104,9 @@
 				8DE3770729B9E6190011C8EA /* ContentView.swift */,
 				8DE3770929B9E61A0011C8EA /* Assets.xcassets */,
 				8DE3770B29B9E61A0011C8EA /* Preview Content */,
+				8D4B9F2D29BA2BCC0063E20D /* HTTPClient.swift */,
+				8D4B9F2F29BA2BF30063E20D /* IPService.swift */,
+				8D4B9F3129BA2C170063E20D /* ScaleChampStore.swift */,
 			);
 			path = ScaleChamp;
 			sourceTree = "<group>";
@@ -257,8 +266,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D4B9F3029BA2BF30063E20D /* IPService.swift in Sources */,
 				8DE3770829B9E6190011C8EA /* ContentView.swift in Sources */,
 				8DE3770629B9E6190011C8EA /* ScaleChampApp.swift in Sources */,
+				8D4B9F3229BA2C170063E20D /* ScaleChampStore.swift in Sources */,
+				8D4B9F2E29BA2BCC0063E20D /* HTTPClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
