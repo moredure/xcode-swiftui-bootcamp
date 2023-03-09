@@ -8,19 +8,38 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var scaleChampStore: ScaleChampStore
+
+    init(scaleChampStore: ScaleChampStore) {
+        self.scaleChampStore = scaleChampStore
+    }
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            if self.scaleChampStore.ip != nil {
+                Text(self.scaleChampStore.ip!)
+            } else if self.scaleChampStore.isLoading {
+                Text("Is loading!")
+            } else {
+                Text("Hello, world!").onAppear {
+                    Task {
+                        await self.scaleChampStore.loadIP()
+                    }
+                }
+            }
+
         }
         .padding()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
+    class IPServiceMock: IPServiceDelegate {
+        func loadIP() async  -> String {
+            return "good bye"
+        }
+    }
     static var previews: some View {
-        ContentView()
+        ContentView(scaleChampStore: ScaleChampStore(ipServiceDelegate: IPServiceMock()))
     }
 }
