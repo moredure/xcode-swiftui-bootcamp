@@ -63,7 +63,7 @@ class ScaleChampStore: ObservableObject {
 
 @main
 struct ScaleChampApp: App {
-    var scaleChampStore: ScaleChampStore
+    let scaleChampStore: ScaleChampStore
 
     init(scaleChampStore: ScaleChampStore) {
         self.scaleChampStore = scaleChampStore

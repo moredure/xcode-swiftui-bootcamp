@@ -18,13 +18,9 @@ struct ContentView: View {
         VStack {
             if self.scaleChampStore.ip != nil {
                 Text(self.scaleChampStore.ip!)
-            } else if self.scaleChampStore.isLoading {
-                Text("Is loading!")
             } else {
-                Text("Hello, world!").onAppear {
-                    Task {
-                        await self.scaleChampStore.loadIP()
-                    }
+                Text("Is loading!").onAppear {
+                    await self.scaleChampStore.loadIP()
                 }
             }
 
