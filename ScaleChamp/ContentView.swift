@@ -11,21 +11,25 @@ struct ContentView: View {
     @ObservedObject var scaleChampStore: ScaleChampStore
 
     init(scaleChampStore: ScaleChampStore) {
+        print("init")
         self.scaleChampStore = scaleChampStore
     }
 
     var body: some View {
-        VStack {
-            if self.scaleChampStore.ip != nil {
-                Text(self.scaleChampStore.ip!)
+        ScrollView {
+            if self.scaleChampStore.ip != "" {
+                Text(self.scaleChampStore.ip).padding()
             } else {
-                Text("Is loading!").task {
-                    await self.scaleChampStore.loadIP()
-                }
+                Text("Is loading!").padding()
             }
-
+        }.refreshable {
+            print("doing")
+            
+            await self.scaleChampStore.loadIP()
+        }.task {
+            print("onAppear")
+            await self.scaleChampStore.loadIP()
         }
-        .padding()
     }
 }
 

@@ -9,20 +9,20 @@ import SwiftUI
 
 
 protocol IPServiceDelegate {
-    func loadIP() async  -> String
+    func loadIP() async throws  -> String
 }
 
 protocol HTTPClientDelegate {
-    func request(url: String) async  -> String
+    func request(url: String) async throws  -> String
 }
 
 class HTTPClient: HTTPClientDelegate {
-    func request(url: String) async -> String {
-        guard let url = URL(string: url) else { fatalError("Missing URL") }
-        let urlRequest = URLRequest(url: url)
-        try! await Task.sleep(nanoseconds: 3_000_000_000)
-        let (data, response) = try! await URLSession.shared.data(for: urlRequest)
+
+    func request(url: String) async throws -> String {
+        guard let url1 = URL(string: url) else { fatalError("Missing URL") }
+        let (data, response) = try await URLSession.shared.data(from: url1)
         guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Error while fetching data") }
+
         return String(decoding: data, as: UTF8.self)
     }
 }
@@ -34,17 +34,16 @@ class IPService: IPServiceDelegate {
         self.httpClient = httpClient
     }
 
-    func loadIP() async -> String {
-        let url = await self.httpClient.request(url: "https://ifconfig.me")
+    func loadIP() async throws -> String {
+        let url = try await self.httpClient.request(url: "https://ifconfig.me")
         return url
     }
 }
 
-@MainActor
-class ScaleChampStore: ObservableObject {
-    @Published var ip: String?
 
-    @Published var isLoading: Bool = false
+class ScaleChampStore: ObservableObject {
+    @Published var ip: String = ""
+
 
     let ipServiceDelegate: IPServiceDelegate
     
@@ -52,12 +51,13 @@ class ScaleChampStore: ObservableObject {
         self.ipServiceDelegate = ipServiceDelegate
     }
 
+    @MainActor
     func loadIP() async {
-        self.isLoading = true
-        defer {
-            self.isLoading = false
+        do {
+            self.ip = try await self.ipServiceDelegate.loadIP()
+        } catch {
+            print(error)
         }
-        self.ip = await self.ipServiceDelegate.loadIP()
     }
 }
 
