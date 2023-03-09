@@ -19,7 +19,7 @@ struct ContentView: View {
             if self.scaleChampStore.ip != nil {
                 Text(self.scaleChampStore.ip!)
             } else {
-                Text("Is loading!").onAppear {
+                Text("Is loading!").task {
                     await self.scaleChampStore.loadIP()
                 }
             }
