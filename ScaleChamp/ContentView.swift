@@ -11,24 +11,23 @@ struct ContentView: View {
     @ObservedObject var scaleChampStore: ScaleChampStore
 
     init(scaleChampStore: ScaleChampStore) {
-        print("init")
         self.scaleChampStore = scaleChampStore
     }
 
     var body: some View {
-        ScrollView {
+        VStack {
             if self.scaleChampStore.ip != "" {
-                Text(self.scaleChampStore.ip).padding()
+                ScrollView {
+                        ShareLink(item: self.scaleChampStore.ip) {
+                            Label("My IP: " + self.scaleChampStore.ip, systemImage:  "square.and.arrow.up")
+                        }.padding()
+                }
+                .refreshable(action: self.scaleChampStore.loadIP)
             } else {
-                Text("Is loading!").padding()
+                ProgressView()
+                    .padding()
+                    .task(self.scaleChampStore.loadIP)
             }
-        }.refreshable {
-            print("doing")
-            await self.scaleChampStore.loadIP()
-            print(Task.isCancelled)
-        }.task {
-            print("onAppear")
-            await self.scaleChampStore.loadIP()
         }
     }
 }
@@ -36,9 +35,11 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     class IPServiceMock: IPServiceDelegate {
         func loadIP() async  -> String {
+            try! await Task.sleep(nanoseconds: 1_000_000_000)
             return "good bye"
         }
     }
+
     static var previews: some View {
         ContentView(scaleChampStore: ScaleChampStore(ipServiceDelegate: IPServiceMock()))
     }

@@ -17,7 +17,8 @@ class ScaleChampStore: ObservableObject {
     }
 
     @MainActor
-    func loadIP() async {
+    @Sendable
+    func loadIP() async -> Void {
         do {
             self.ip = try await self.ipServiceDelegate.loadIP()
         } catch {
